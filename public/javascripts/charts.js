@@ -93,6 +93,13 @@ donutChart = () => {
             .each(function (d) {
                 this._current = d;
             });
+
+
+        // Code for adding dots into each slice
+        path.enter().append("circle")
+            .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+            .attr('r', 5)
+            .style("fill", "#000");
     }
 
     update();
@@ -136,6 +143,12 @@ pieChart = () => {
             .each(function (d) {
                 this._current = d;
             });
+
+        // Code for adding dots into each slice
+        path.enter().append("circle")
+            .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+            .attr('r', 5)
+            .style("fill", "#000");
     }
 
     update();
@@ -146,7 +159,7 @@ triangleBar = () => {
 
     const margin = {top: 100, right: 40, bottom: 50, left: 40},
         triangleChartWidth = 960 - margin.left - margin.right,
-        trinagleChartHeight = 500 - margin.top - margin.bottom;
+        triangleChartHeight = 500 - margin.top - margin.bottom;
 
     const overlap = 15;
 
@@ -155,11 +168,11 @@ triangleBar = () => {
         .padding(0.1);
 
     const y = d3.scaleLinear()
-        .range([trinagleChartHeight, 0]);
+        .range([triangleChartHeight, 0]);
 
     let triangleChartSvg = d3.select("#chart-area").append("svg")
         .attr("width", triangleChartWidth + margin.left + margin.right)
-        .attr("height", trinagleChartHeight + margin.top + margin.bottom)
+        .attr("height", triangleChartHeight + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -178,16 +191,17 @@ triangleBar = () => {
         .attr("points", (d) => {
             const left = x(d.key) - overlap;
             const top = y(d.value);
-            const bottom = trinagleChartHeight;
+            const bottom = triangleChartHeight;
             return left + "," + bottom + " " + (left + (x.bandwidth() / 2) + overlap) + "," + top + " " + (left + x.bandwidth() + (2 * overlap)) + "," + bottom;
         })
         .style("opacity", ".5");
 
+
     triangleChartSvg.append("line")
         .attr("x1", 0 - overlap)
-        .attr("y1", trinagleChartHeight)
+        .attr("y1", triangleChartHeight)
         .attr("x2", triangleChartWidth + overlap)
-        .attr("y2", trinagleChartHeight)
+        .attr("y2", triangleChartHeight)
         .attr("stroke", "#000000")
         .attr("stroke-width", "3");
 };
