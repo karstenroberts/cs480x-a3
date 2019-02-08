@@ -1,19 +1,51 @@
-let testNum = 1;
+const ChartTypesEnum = Object.freeze({"PIE":0, "TORUS":1, "BAR":2, "COMPLETE":3});
+let testNum = 0;
+let correctAnswer = 42;
+let userAnswer = 666;
+let currType = ChartTypesEnum.TORUS;
 
-
+updateChart = () => {
+    if (currType !== ChartTypesEnum.COMPLETE) {
+        let input = document.getElementById("number");
+        userAnswer = input.value;
+        input.value = '';
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", '/', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("u=" + userAnswer + "&c=" + correctAnswer + "&t=" + currType);
+    }
+    drawChart();
+};
 
 drawChart = () => {
     clearChart();
-    if (testNum <= 20) {
-        donutChart();
-    } else if (testNum <= 40) {
-        pieChart();
-    } else if (testNum <= 60) {
-        triangleBar();
-    } else {
-        document.getElementById("chart-area").innerHTML = "<img alt='Thanks!' src='/images/placeholder.jpg'/>"
-    }
     testNum++;
+    updateChartType();
+    switch (currType) {
+        case ChartTypesEnum.TORUS:
+            donutChart();
+            break;
+        case ChartTypesEnum.PIE:
+            pieChart();
+            break;
+        case ChartTypesEnum.BAR:
+            triangleBar();
+            break;
+        case ChartTypesEnum.COMPLETE:
+            document.getElementById("chart-area").innerHTML = "<img alt='Thanks!' src='/images/placeholder.jpg'/>";
+    }
+};
+
+updateChartType = () => {
+    if (testNum <= 20) {
+        currType = ChartTypesEnum.TORUS;
+    } else if (testNum <= 40) {
+        currType = ChartTypesEnum.PIE;
+    } else if (testNum <= 60) {
+        currType = ChartTypesEnum.BAR;
+    } else {
+        currType = ChartTypesEnum.COMPLETE;
+    }
 };
 
 clearChart = () => {
