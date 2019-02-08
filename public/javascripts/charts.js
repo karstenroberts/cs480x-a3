@@ -1,4 +1,4 @@
-const ChartTypesEnum = Object.freeze({"PIE":0, "TORUS":1, "BAR":2, "COMPLETE":3});
+const ChartTypesEnum = Object.freeze({"TORUS":0, "PIE":1, "BAR":2, "COMPLETE":3});
 let testNum = 0;
 let correctAnswer = 42;
 let userAnswer = 666;
