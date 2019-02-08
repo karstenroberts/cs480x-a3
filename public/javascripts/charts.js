@@ -1,6 +1,6 @@
 const ChartTypesEnum = Object.freeze({"TORUS":0, "PIE":1, "BAR":2, "COMPLETE":3});
 let testNum = 0; //should be 0
-let correctAnswer = 42;
+let correctAnswer = 58;
 let userAnswer = 666;
 let currType = ChartTypesEnum.TORUS;
 let userID;
@@ -22,9 +22,9 @@ identifyUser = () => {
 };
 
 function newIdentity () {
-    const data = this.response;
-    if (data) {
-        const oldID = parseInt(JSON.parse(this.response)[0].id);
+    const data = JSON.parse(this.response);
+    if (data.length > 0) {
+        const oldID = parseInt(data[0].id);
         console.log(oldID);
         userID = oldID + 1;
     } else {
@@ -45,6 +45,7 @@ keyPressHandler = (e) => {
 };
 
 updateChart = () => {
+
     if (currType !== ChartTypesEnum.COMPLETE) {
         let input = document.getElementById("number");
         userAnswer = input.value;
@@ -73,6 +74,7 @@ updateChart = () => {
 drawChart = () => {
     clearChart();
     testNum++;
+    document.getElementById("progress").innerText = "You are looking at chart " + testNum + "/60";
     updateChartType();
     switch (currType) {
         case ChartTypesEnum.TORUS:
@@ -86,6 +88,7 @@ drawChart = () => {
             break;
         case ChartTypesEnum.COMPLETE:
             document.getElementById("chart-area").innerHTML = "<h1>Thanks for taking our survey!</h1>";
+            document.getElementById("progress").innerText = "FINISHED!"
     }
 };
 
