@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  db.getDB().collection('test').save(req.body, (err, result) => {
+  db.getDB().collection('data').save(req.body, (err, result) => {
     if (err) return console.log(err);
     console.log("saved to database!");
     res.redirect('/')

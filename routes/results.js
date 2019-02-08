@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/data', function(req, res, next) {
-  db.getDB().collection('test').find({}).toArray((err, result) => {
+  db.getDB().collection('data').find({}).toArray((err, result) => {
     if (err) throw err;
     res.send(result)
   });
