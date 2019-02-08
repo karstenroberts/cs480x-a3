@@ -15,6 +15,21 @@ router.post('/', function(req, res, next) {
   });
 });
 
+router.get('/user', function(req, res, next) {
+  db.getDB().collection('users').find().sort({_id: -1}).limit(1).toArray((err, result) => {
+    console.log(result);
+    if (err) throw err;
+    res.send(result)
+  });
+});
+
+router.post('/user', function(req, res, next) {
+  db.getDB().collection('users').save(req.body, (err, result) => {
+    if (err) return console.log(err);
+    console.log("saved user to database!");
+    res.redirect('/')
+  })
+});
 
 
 module.exports = router;

@@ -9,18 +9,18 @@
         <script src="/javascripts/charts.js"></script>
     </head>
 
-    <body onload="drawChart()">
+    <body onload="init()">
         <h1>Save the Human Kind</h1>
         <h2>by answering this quick survey.</h2>
         <p>Two values are marked with dots. <br>
-            What percentage is the smaller value of the larger one? <br>
-            Please put your answer below. <br>
-            E.g. If you think the smaller one is exactly a half of the bigger one, please write 50.
+            For each chart, answer as accurately as possible: <br><br>
+            <i>What percentage is the smaller value of the larger value? </i><br><br>
+            For example, if you think the smaller one is exactly half of the bigger one, please write 50. <br>
         </p>
 
-        <input id="number" type="number" min="1" max="100" name="number">
-        <button id="nButton" onclick="updateChart()">Submit</button>
-        <div id="chart-area">
-        </div>
+        <label for='number'>Your percentage guess: </label>
+        <input id='number' type='number' min='1' max='100' name='number'>
+        <button id='nButton' onclick='updateChart()'>Submit</button>
+        <div id='chart-area'></div>
     </body>
 </html>
